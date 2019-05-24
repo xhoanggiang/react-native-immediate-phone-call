@@ -26,6 +26,7 @@ public class RNImmediatePhoneCallModule extends ReactContextBaseJavaModule {
             rnImmediatePhoneCallModule = this;
         }
         rnImmediatePhoneCallModule.reactContext = reactContext;
+	rnImmediatePhoneCallModule.reactContext.addActivityEventListener(this);
     }
 
     @Override
@@ -37,7 +38,7 @@ public class RNImmediatePhoneCallModule extends ReactContextBaseJavaModule {
     public void immediatePhoneCall(String number) {
         RNImmediatePhoneCallModule.number = Uri.encode(number);
 
-        if (ContextCompat.checkSelfPermission(reactContext.getApplicationContext(),
+        if (ContextCompat.checkSelfPermission(rnImmediatePhoneCallModule.reactContext.getApplicationContext(),
                 android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
             call();
         } else {
