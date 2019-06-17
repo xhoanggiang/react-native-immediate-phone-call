@@ -37,16 +37,16 @@ public class RNImmediatePhoneCallModule extends ReactContextBaseJavaModule {
     public void immediatePhoneCall(String number) {
         RNImmediatePhoneCallModule.number = Uri.encode(number);
 
-        if(rnImmediatePhoneCallModule.reactContext == null) return;
-
-        if (ContextCompat.checkSelfPermission(rnImmediatePhoneCallModule.reactContext.getApplicationContext(),
-                android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-            call();
-        } else {
-            ActivityCompat.requestPermissions(getCurrentActivity(),
-                    new String[]{android.Manifest.permission.CALL_PHONE},
-                    PERMISSIONS_REQUEST_ACCESS_CALL);
-        }
+        if(rnImmediatePhoneCallModule.reactContext != null) {
+		if (ContextCompat.checkSelfPermission(rnImmediatePhoneCallModule.reactContext.getApplicationContext(),
+						      android.Manifest.permission.CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+		    call();
+		} else {
+		    ActivityCompat.requestPermissions(getCurrentActivity(),
+			    new String[]{android.Manifest.permission.CALL_PHONE},
+			    PERMISSIONS_REQUEST_ACCESS_CALL);
+		}
+	}
     }
 	
 	@SuppressLint("MissingPermission")
